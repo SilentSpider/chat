@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+</head>
+<body>
+<script src="/socket.io.js"></script>
+<script src="/jquery.js"></script>
+<script>
+    var socket = io();
+
+    document.emit = function(txt) {
+        var msg = {};
+        msg.r = '{{room}}';
+        msg.u = '{{user}}';
+        msg.m = txt;
+        socket.emit('m', JSON.stringify(msg));
+    }
+
+    document.onincoming = function(callback) {
+        document.incoming = callback;
+    }
+
+    socket.on('{{room}}', function(msg){
+        if(document.incoming) {
+            document.incoming(msg);
+        }
+    });
+
+    socket.on('connect', function(socket){
+        document.emit();
+        window.parent.document.getElementById('chatframe').src = "{{user}}/advancedChat";
+    });
+
+</script>
+
+
+</body>
+</html>

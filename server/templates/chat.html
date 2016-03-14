@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <link rel="stylesheet" type="text/css" href="/style.css"/>
+	</head>
+	<body>
+    {{#ifEquals mode 'history'}}
+    <div>
+        <span class="history redBackground ossFont"><a href="chat">Real time</a></span>
+    </div>
+     {{else}}
+    <div>
+        <span class="history redBackground ossFont"><a href="?m=h">History</a></span>
+    </div>
+    {{/ifEquals}}

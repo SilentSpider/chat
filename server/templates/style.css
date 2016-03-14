@@ -1,0 +1,281 @@
+body {
+	background-color: #333;
+	margin: 0px; 
+	padding: 0px; 
+	border: 0px;
+	height:100%;
+	overflow:hidden;
+}
+
+/*
+    Both chats
+*/
+
+.postBox{
+    position:absolute;
+    left: 8ex;
+    right: 0.5ex;
+    height: 7ex;
+    top: 0.5ex;
+}
+
+/*
+    Advanced chat
+*/
+
+.post {
+    height: 8ex;
+    position:absolute;
+    left: 0;
+    right: 0;
+    bottom:1.5ex;
+}
+
+.achat {
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 10ex;
+	position:absolute;
+	overflow-y:scroll;
+}
+
+
+/*
+    Basic chat
+*/
+
+.chat {
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 10ex;
+	position:absolute;
+}
+
+
+/*
+    Login
+*/
+
+.center {
+	position: relative;
+}
+
+.centerBox {
+    width: 300px;
+    height: 8ex;
+    padding: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: 70px 0 0 -170px;
+    text-align: center;
+}
+
+/*
+    About page
+*/
+
+
+.titleOuter {
+    padding: 2ex;
+    text-align: center;
+}
+.boxOuter {
+    padding: 1ex;
+    text-align: center;
+}
+
+.title {
+    font-size: 15px;
+    font-weight: 300;
+    border-radius: 5px;
+    color: white;
+}
+
+
+/*
+    Chat messages advanced and basic
+*/
+
+.messageBox {
+    margin-left: 10px;
+    margin-top: 10px;
+    width: 75%;
+    float: left;
+}
+
+.messageNick {
+    color: gray;
+    font-size: 10px;
+    background-color: lightgray;
+    padding: 1px 4px;
+    border-radius: 5px;
+}
+.messageTime {
+    color: darkgrey;
+    font-size: 12px;
+    padding-left: 3px;
+}
+
+.messageText {
+    font-size: 13px;
+    font-weight: 300;
+    color: #000;
+    background-color: darkgrey;
+    padding: 0px;
+    box-shadow: 2px 0 0 darkgrey, -2px 0 0 darkgrey, 2px 2px 0 darkgrey, -2px 2px darkgrey;
+    line-height: 23px;
+    margin-top: 0.5ex;
+    margin-right: 0.5ex;
+    padding-top: 0.15ex;
+    border-radius: 5px;
+    -webkit-box-decoration-break: clone;
+    -o-box-decoration-break: clone;
+    box-decoration-break: clone;
+}
+
+.messageFile {
+    font-size: 11px;
+    font-weight: 300;
+}
+
+.messageBox:last-of-type {
+    margin-bottom: 10px;
+}
+
+.messageTextCont {
+    margin-left: 5px;
+    word-break: break-word;
+}
+
+.messageInline {
+    display: inline;
+}
+
+.you {
+    float: right;
+}
+
+/*
+    Basic chat header switch
+*/
+
+.history {
+    border-radius: 0.5ex;
+    text-align: center;
+    font-size: 12px;
+    padding: 1ex;
+}
+
+.hchat {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    position:absolute;
+    overflow-y:scroll;
+}
+
+/*
+    Generic props
+*/
+
+.redBackground {
+    background-color: #900a11;
+    box-shadow: 2px 0 0 #900a11, -2px 0 0 #900a11, 2px 2px 0 #900a11, -2px 2px #900a11;
+}
+
+.ossFont {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+/*
+    Chat and advanced chat
+*/
+
+*:focus {
+    outline: 0;
+}
+
+.input {
+    width: 100%;
+    height: 100%;
+    resize: none;
+    border-radius: 1ex;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 18px;
+    outline: 0;
+}
+
+.fileUpload {
+    background-image: none;
+    border-image-outset: 0px;
+    border-image-repeat: stretch;
+    border-image-slice: 100%;
+    border-image-source: none;
+    border-image-width: 1;
+    border-radius: 1ex;
+    border-color: #900a11;
+    border-style: solid;
+    border-width: 1px;
+    box-sizing: border-box;
+    color: white;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: normal;
+    height: 7ex;
+    line-height: 6ex;
+    margin-bottom: 0px;
+    margin-left: 0.5ex;
+    margin-right: 10px;
+    margin-top: 0.5ex;
+    padding-bottom: 0.5ex;
+    padding-left: 9px;
+    padding-right: 12px;
+    padding-top: 0.5ex;
+    position: relative;
+    text-align: center;
+    width: 7ex;
+}
+
+.fileUpload input.upload {
+    -webkit-appearance: none;
+    -webkit-rtl-ordering: logical;
+    -webkit-user-select: text;
+    -webkit-writing-mode: horizontal-tb;
+    align-items: baseline;
+    box-sizing: border-box;
+    color: darkgray;
+    cursor: pointer;
+    display: block;
+    font-size: 20px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    height: 7ex;
+    letter-spacing: normal;
+    line-height: 28.57px;
+    position: absolute;
+    opacity: 0;
+    right: 0px;
+    text-align: start;
+    text-indent: 0px;
+    text-shadow: none;
+    text-transform: none;
+    top: 0px;
+    white-space: nowrap;
+    word-spacing: 0px;
+    writing-mode: lr-tb;
+}

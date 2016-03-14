@@ -1,0 +1,24 @@
+{{#msgs}}
+<style>#d{{addSubtract ../offset @index 3}} {display: none;}</style>
+<div id="d{{addSubtract ../offset @index 0}}">
+    {{#ifEquals u ../user}}
+    <div class="messageBox you">
+        {{else}}
+        <div class="messageBox">
+            {{/ifEquals}}
+            <div class="messageInline messageNick ossFont">{{u}}</div>
+            <div class="messageInline messageTime ossFont">{{formatTime t}}</div>
+            <div class="messageTextCont">
+
+                {{#ifExists m}}
+                <span class="messageText ossFont">{{m}}</span>
+                {{/ifExists}}
+
+                {{#ifExists f}}
+                <span class="messageText messageFile redBackground ossFont"><a href="file/{{t}}?name={{f}}">{{f}}</a></span>
+                {{/ifExists}}
+
+            </div>
+        </div>
+    </div>
+    {{/msgs}}

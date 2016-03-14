@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="/jquery.js"></script>
+		<link rel="stylesheet" type="text/css" href="/style.css"/>
+	</head>
+	<body>
+		<div class="achat">
+            {{#msgs}}
+            {{#ifEquals u ../user}}
+            <div class="messageBox you">
+                {{else}}
+                <div class="messageBox">
+                    {{/ifEquals}}
+                    <div class="messageInline messageNick ossFont">{{u}}</div>
+                    <div class="messageInline messageTime ossFont">{{formatTime t}}</div>
+                    <div class="messageTextCont">
+
+                        {{#ifExists m}}
+                        <span class="messageText ossFont">{{m}}</span>
+                        {{/ifExists}}
+
+                        {{#ifExists f}}
+                        <span class="messageText messageFile redBackground ossFont"><a href="file/{{t}}?name={{f}}">{{f}}</a></span>
+                        {{/ifExists}}
+
+                    </div>
+                </div>
+                {{/msgs}}
+
+        </div>
+		  <div class="post">
+			  <form id="post" method="post" action="advancedPost" enctype="multipart/form-data">
+                  <input type="hidden" id="uploadId" name="uploadId"/>
+			  <div class="fileUpload btn btn-primary ossFont redBackground">
+				<span>File</span>
+				<input id="file" name="file" type="file" class="upload" />
+			  </div>
+			  </form>
+			  <div class="postBox">
+		        <input id="msg" name="msg" class="input" type="text" placeholder="Enter your message and hit return" autofocus/>
+			  </div>		  
+		  </div>		
+	</body>
+
+<script src="advanced.js"></script>
+</html>

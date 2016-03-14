@@ -1,0 +1,23 @@
+<div class="hchat">
+{{#msgs}}
+    {{#ifEquals u ../user}}
+    <div class="messageBox you">
+        {{else}}
+        <div class="messageBox">
+            {{/ifEquals}}
+            <div class="messageInline messageNick ossFont">{{u}}</div>
+            <div class="messageInline messageTime ossFont">{{formatTime t}}</div>
+            <div class="messageTextCont">
+
+                {{#ifExists m}}
+                <span class="messageText ossFont">{{m}}</span>
+                {{/ifExists}}
+
+                {{#ifExists f}}
+                <span class="messageText messageFile redBackground ossFont"><a href="file/{{t}}?name={{f}}">{{f}}</a></span>
+                {{/ifExists}}
+
+            </div>
+        </div>
+        {{/msgs}}
+</div>

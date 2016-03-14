@@ -1,0 +1,34 @@
+{
+    "port": 3000,
+    "torHostFile": "/Library/Tor/var/lib/tor/hidden_service/hostname",
+    "alphabet": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    "phonetic": [
+        "ALPHA",
+        "BRAVO",
+        "CHARLIE",
+        "DELTA",
+        "ECHO",
+        "FOXTROT",
+        "GOLF",
+        "HOTEL",
+        "INDIA",
+        "JULIET",
+        "KILO",
+        "LIMA",
+        "MIKE",
+        "NOVEMBER",
+        "OSCAR",
+        "PAPA",
+        "QUEBEC",
+        "ROMEO",
+        "SIERRA",
+        "TANGO",
+        "UNIFORM",
+        "VICTOR",
+        "WHISKEY",
+        "XRAY",
+        "YANKEE",
+        "ZEBRA"
+    ]
+
+}
