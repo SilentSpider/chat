@@ -1,3 +1,7 @@
 
 cd /system/usr/chat/server
-../jx index.js
+while true
+do
+  ../jx index.js
+  sleep 1
+done
