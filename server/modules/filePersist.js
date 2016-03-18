@@ -1,5 +1,5 @@
-module.exports = function(fs) {
-	var basePath = __dirname + '/../rooms/';
+module.exports = function(fs, config) {
+	var basePath = config.externalStoragePath + '/rooms/';
 	var CHAT_FILE = '/chat.json';
 	
 	var ensureRoomExists = function(room) {
@@ -7,6 +7,7 @@ module.exports = function(fs) {
 			return fs.statSync(basePath + room);
 		}
 		catch(e) {
+			fs.mkdirSync(basePath);
 			fs.mkdirSync(basePath + room);
 		}
 	};
