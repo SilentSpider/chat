@@ -1,6 +1,20 @@
 module.exports = function(renderPipe, crypto, qr, config, fs, useSSL, xml) {
+
+    var sdCardMounted = function(res) {
+        try {
+            var stats = fs.lstatSync(config.externalStoragePath);
+            return stats && stats.isDirectory();
+        }
+        catch (e) {
+            renderPipe.deliver('nosdcard.html', {}, res);
+            return false;
+        }
+    };
+
 	return {
 		frontPage: function(req, res) {
+			if(!sdCardMounted(res)) return;
+
             var random = "";
             var phonetic = ""
             for(var i = 0; i < 4; i++) {
@@ -12,6 +26,8 @@ module.exports = function(renderPipe, crypto, qr, config, fs, useSSL, xml) {
 		},
 
 		room: function(req, res) {
+            if(!sdCardMounted(res)) return;
+
 			console.log("requesting " + req.url);
 			if(req.params && req.params.room) {	
 				console.log('entering room ' + req.params.room);	
@@ -20,6 +36,8 @@ module.exports = function(renderPipe, crypto, qr, config, fs, useSSL, xml) {
 					{room:req.params.room, user:req.params.user}, res);
 		},
 		login: function(req, res) {
+            if(!sdCardMounted(res)) return;
+
 			if(req.query.user) {
 				 res.redirect('/'+ req.params.room + '/' +
 				 	req.query.user);

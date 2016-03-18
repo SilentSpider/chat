@@ -1,6 +1,7 @@
 {
     "port": 3000,
-    "torHostFile": "/Library/Tor/var/lib/tor/hidden_service/hostname",
+    "torHostFile": "/data/oss/tor/hidden_service/hostname",
+    "externalStoragePath" : "/storage/external_storage/sdcard1",
     "alphabet": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     "phonetic": [
         "ALPHA",
