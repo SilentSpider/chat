@@ -2,7 +2,7 @@ var x = require('casper').selectXPath;
 var utils = require("utils");
 var shotCnt = 0;
 var testName = "LongChatReenter";
-var numberOfChatMessagesToTest = 100;
+var numberOfChatMessagesToTest = 10;
 
 casper.options.viewportSize = {width: 1172, height: 806};
 casper.on('page.error', function(msg, trace) {
@@ -65,7 +65,7 @@ casper.test.begin('Testing to reenter a long chat', function(test) {
     casper.withFrame('chatframe', function() {
         this.capture(testName + shotCnt++ + ".png");
         this.test.assertSelectorExists("input[name='msg']", 'Should show chat input');
-        this.sendKeys("input[name='msg']", "The quick brown fox jumps over the lazy dog 0", {keepFocus: true});
+        this.sendKeys("input[name='msg']", "The quick brown fox jumps over the lazy dog 100", {keepFocus: true});
         this.capture(testName + shotCnt++ + ".png");
         this.sendKeys("input[name='msg']", casper.page.event.key.Enter , {keepFocus: true});
         this.capture(testName + shotCnt++ + ".png");

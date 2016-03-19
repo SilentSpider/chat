@@ -2,7 +2,7 @@ var x = require('casper').selectXPath;
 var utils = require("utils");
 var shotCnt = 0;
 var testName = "LongChat";
-var numberOfChatMessagesToTest = 1000;
+var numberOfChatMessagesToTest = 100;
 
 casper.options.viewportSize = {width: 1172, height: 806};
 casper.on('page.error', function(msg, trace) {
