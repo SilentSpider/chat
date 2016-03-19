@@ -1,6 +1,7 @@
 var x = require('casper').selectXPath;
 var utils = require("utils");
 var shotCnt = 0;
+var testName = "00simple";
 
 casper.options.viewportSize = {width: 1172, height: 806};
 casper.on('page.error', function(msg, trace) {
@@ -31,7 +32,7 @@ casper.test.begin('Simple walk from front page to submitting a few messages', fu
         function success() {
             test.assertExists(".centerBox img");
             this.click(".centerBox img");
-            this.capture(shotCnt++ + ".png");
+            this.capture(testName + shotCnt++ + ".png");
         },
         function fail() {
             test.assertExists(".centerBox img");
@@ -40,7 +41,7 @@ casper.test.begin('Simple walk from front page to submitting a few messages', fu
         function success() {
             test.assertExists("form#form1 input[name='user']");
             this.click("form#form1 input[name='user']");
-            this.capture(shotCnt++ + ".png");
+            this.capture(testName + shotCnt++ + ".png");
         },
         function fail() {
             test.assertExists("form#form1 input[name='user']");
@@ -49,7 +50,7 @@ casper.test.begin('Simple walk from front page to submitting a few messages', fu
         function success() {
             this.sendKeys("input[name='user']", "Alice", {keepFocus: true});
             this.sendKeys("input[name='user']", casper.page.event.key.Enter , {keepFocus: true});
-            this.capture(shotCnt++ + ".png");
+            this.capture(testName + shotCnt++ + ".png");
         },
         function fail() {
             test.assertExists("input[name='user']");
@@ -57,21 +58,21 @@ casper.test.begin('Simple walk from front page to submitting a few messages', fu
 
 
     casper.withFrame('chatframe', function() {
-        this.capture(shotCnt++ + ".png");
+        this.capture(testName + shotCnt++ + ".png");
         this.test.assertSelectorExists("input[name='msg']", 'Should show chat input');
         this.sendKeys("input[name='msg']", "First chat message", {keepFocus: true});
-        this.capture(shotCnt++ + ".png");
+        this.capture(testName + shotCnt++ + ".png");
         this.sendKeys("input[name='msg']", casper.page.event.key.Enter , {keepFocus: true});
-        this.capture(shotCnt++ + ".png");
+        this.capture(testName + shotCnt++ + ".png");
 
         casper.waitForSelectorText("input[name='msg']", "",
             function success() {
-                this.capture(shotCnt++ + ".png");
+                this.capture(testName + shotCnt++ + ".png");
                 test.assertTextExists("First chat message", 'page body contains "First chat message"');
                 this.sendKeys("input[name='msg']", "Second chat message", {keepFocus: true});
-                this.capture(shotCnt++ + ".png");
+                this.capture(testName + shotCnt++ + ".png");
                 this.sendKeys("input[name='msg']", casper.page.event.key.Enter , {keepFocus: true});
-                this.capture(shotCnt++ + ".png");
+                this.capture(testName + shotCnt++ + ".png");
             },
             function fail() {
                 test.assertExists("input[name='user']");
@@ -79,12 +80,12 @@ casper.test.begin('Simple walk from front page to submitting a few messages', fu
 
         casper.waitForSelectorText("input[name='msg']", "",
             function success() {
-                this.capture(shotCnt++ + ".png");
+                this.capture(testName + shotCnt++ + ".png");
                 test.assertTextExists("Second chat message", 'page body contains "Second chat message"');
                 this.sendKeys("input[name='msg']", "Third chat message", {keepFocus: true});
-                this.capture(shotCnt++ + ".png");
+                this.capture(testName + shotCnt++ + ".png");
                 this.sendKeys("input[name='msg']", casper.page.event.key.Enter , {keepFocus: true});
-                this.capture(shotCnt++ + ".png");
+                this.capture(testName + shotCnt++ + ".png");
             },
             function fail() {
                 test.assertExists("input[name='user']");
