@@ -24,7 +24,7 @@ casper.waitForSelectorText = function(selector, text, then, onTimeout, timeout){
     return this;
 };
 
-casper.test.begin('Resurrectio test', function(test) {
+casper.test.begin('Simple walk from front page to submitting a few messages', function(test) {
 
     casper.start('http://localhost:3000/');
     casper.waitForSelector(".centerBox img",
@@ -67,6 +67,7 @@ casper.test.begin('Resurrectio test', function(test) {
         casper.waitForSelectorText("input[name='msg']", "",
             function success() {
                 this.capture(shotCnt++ + ".png");
+                test.assertTextExists("First chat message", 'page body contains "First chat message"');
                 this.sendKeys("input[name='msg']", "Second chat message", {keepFocus: true});
                 this.capture(shotCnt++ + ".png");
                 this.sendKeys("input[name='msg']", casper.page.event.key.Enter , {keepFocus: true});
@@ -79,6 +80,7 @@ casper.test.begin('Resurrectio test', function(test) {
         casper.waitForSelectorText("input[name='msg']", "",
             function success() {
                 this.capture(shotCnt++ + ".png");
+                test.assertTextExists("Second chat message", 'page body contains "Second chat message"');
                 this.sendKeys("input[name='msg']", "Third chat message", {keepFocus: true});
                 this.capture(shotCnt++ + ".png");
                 this.sendKeys("input[name='msg']", casper.page.event.key.Enter , {keepFocus: true});
