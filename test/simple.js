@@ -80,7 +80,7 @@ casper.test.begin('Simple walk from front page to submitting a few messages', fu
         casper.waitForSelectorText("input[name='msg']", "",
             function success() {
                 this.capture(shotCnt++ + ".png");
-                test.assertTextExists("Second chat message", 'page body contains "Scond chat message"');
+                test.assertTextExists("Scond chat message", 'page body contains "Scond chat message"');
                 this.sendKeys("input[name='msg']", "Third chat message", {keepFocus: true});
                 this.capture(shotCnt++ + ".png");
                 this.sendKeys("input[name='msg']", casper.page.event.key.Enter , {keepFocus: true});
