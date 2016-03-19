@@ -2,6 +2,7 @@ var x = require('casper').selectXPath;
 var utils = require("utils");
 var shotCnt = 0;
 var testName = "LongChat";
+var numberOfChatMessagesToTest = 100;
 
 casper.options.viewportSize = {width: 1172, height: 806};
 casper.on('page.error', function(msg, trace) {
@@ -106,21 +107,19 @@ casper.test.begin('Simple walk from front page to submitting a few messages', fu
 
             casper.waitForSelectorText("input[name='msg']", "",
                 function success() {
-                    this.capture(testName + shotCnt++ + ".png");
                     test.assertTextExists("Chat message " + count, 'Page body contains "Chat message ' + count + '"');
                     this.sendKeys("input[name='msg']", "Chat message " + ++count, {keepFocus: true});
-                    this.capture(testName + shotCnt++ + ".png");
                     this.sendKeys("input[name='msg']", casper.page.event.key.Enter , {keepFocus: true});
-                    this.capture(testName + shotCnt++ + ".png");
                     callback();
                 },
                 function fail() {
                     test.assertExists("input[name='user']");
+                    this.capture(testName + shotCnt++ + ".png");
                     callback();
                 });
         }
 
-        asyncLoop(10, function(loop) {
+        asyncLoop(numberOfChatMessagesToTest, function(loop) {
                 addMessage(loop.iteration(), function(result) {
 
                     // log the iteration
@@ -133,5 +132,7 @@ casper.test.begin('Simple walk from front page to submitting a few messages', fu
         );
     });
 
-    casper.run(function() {test.done();});
+    casper.run(function() {
+        this.capture(testName + shotCnt++ + ".png");
+    });
 });
