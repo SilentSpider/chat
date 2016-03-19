@@ -7,7 +7,12 @@ module.exports = function(fs, config) {
 			return fs.statSync(basePath + room);
 		}
 		catch(e) {
-			fs.mkdirSync(basePath);
+			try {
+				fs.mkdirSync(basePath);
+			}
+			catch(e) {
+				// Ignore since directory may exist
+			}
 			fs.mkdirSync(basePath + room);
 		}
 	};
