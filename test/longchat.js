@@ -134,5 +134,6 @@ casper.test.begin('Simple walk from front page to submitting a few messages', fu
 
     casper.run(function() {
         this.capture(testName + shotCnt++ + ".png");
+        test.done();
     });
 });
