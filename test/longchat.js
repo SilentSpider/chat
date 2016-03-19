@@ -58,7 +58,7 @@ function asyncLoop(iterations, func, callback) {
     return loop;
 }
 
-casper.test.begin('Simple walk from front page to submitting a few messages', function(test) {
+casper.test.begin('Load testing of long chats', function(test) {
 
     casper.start('http://localhost:3000/');
     casper.waitForSelector(".centerBox img",

@@ -25,7 +25,7 @@ casper.waitForSelectorText = function(selector, text, then, onTimeout, timeout){
     return this;
 };
 
-casper.test.begin('Simple walk from front page to submitting a few messages', function(test) {
+casper.test.begin('Using space in the name of user', function(test) {
 
     casper.start('http://localhost:3000/');
     casper.waitForSelector(".centerBox img",
