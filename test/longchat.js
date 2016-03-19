@@ -93,7 +93,7 @@ casper.test.begin('Load testing of long chats', function(test) {
     casper.withFrame('chatframe', function() {
         this.capture(testName + shotCnt++ + ".png");
         this.test.assertSelectorExists("input[name='msg']", 'Should show chat input');
-        this.sendKeys("input[name='msg']", "Chat message 0", {keepFocus: true});
+        this.sendKeys("input[name='msg']", "The quick brown fox jumps over the lazy dog 0", {keepFocus: true});
         this.capture(testName + shotCnt++ + ".png");
         this.sendKeys("input[name='msg']", casper.page.event.key.Enter , {keepFocus: true});
         this.capture(testName + shotCnt++ + ".png");
@@ -103,12 +103,11 @@ casper.test.begin('Load testing of long chats', function(test) {
 
 
         function addMessage(count, callback) {
-            console.log('Hey doing some stuff!');
 
             casper.waitForSelectorText("input[name='msg']", "",
                 function success() {
-                    test.assertTextExists("Chat message " + count, 'Page body contains "Chat message ' + count + '"');
-                    this.sendKeys("input[name='msg']", "Chat message " + ++count, {keepFocus: true});
+                    test.assertTextExists("The quick brown fox jumps over the lazy dog " + count, 'Page body contains "The quick brown fox jumps over the lazy dog ' + count + '"');
+                    this.sendKeys("input[name='msg']", "The quick brown fox jumps over the lazy dog " + ++count, {keepFocus: true});
                     this.sendKeys("input[name='msg']", casper.page.event.key.Enter , {keepFocus: true});
                     callback();
                 },
