@@ -60,35 +60,7 @@ function asyncLoop(iterations, func, callback) {
 
 casper.test.begin('Load testing of long chats', function(test) {
 
-    casper.start('http://localhost:3000/');
-    casper.waitForSelector(".centerBox img",
-        function success() {
-            test.assertExists(".centerBox img");
-            this.click(".centerBox img");
-            this.capture(testName + shotCnt++ + ".png");
-        },
-        function fail() {
-            test.assertExists(".centerBox img");
-        });
-    casper.waitForSelector("form#form1 input[name='user']",
-        function success() {
-            test.assertExists("form#form1 input[name='user']");
-            this.click("form#form1 input[name='user']");
-            this.capture(testName + shotCnt++ + ".png");
-        },
-        function fail() {
-            test.assertExists("form#form1 input[name='user']");
-        });
-    casper.waitForSelector("input[name='user']",
-        function success() {
-            this.sendKeys("input[name='user']", "Alice", {keepFocus: true});
-            this.sendKeys("input[name='user']", casper.page.event.key.Enter , {keepFocus: true});
-            this.capture(testName + shotCnt++ + ".png");
-        },
-        function fail() {
-            test.assertExists("input[name='user']");
-        });
-
+    casper.start('http://localhost:3000/LONG/Alice');
 
     casper.withFrame('chatframe', function() {
         this.capture(testName + shotCnt++ + ".png");
@@ -97,10 +69,6 @@ casper.test.begin('Load testing of long chats', function(test) {
         this.capture(testName + shotCnt++ + ".png");
         this.sendKeys("input[name='msg']", casper.page.event.key.Enter , {keepFocus: true});
         this.capture(testName + shotCnt++ + ".png");
-
-
-
-
 
         function addMessage(count, callback) {
 
