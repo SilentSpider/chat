@@ -48,7 +48,7 @@ casper.test.begin('Simple walk from front page to submitting a few messages', fu
         });
     casper.waitForSelector("input[name='user']",
         function success() {
-            this.sendKeys("input[name='user']", "Alice", {keepFocus: true});
+            this.sendKeys("input[name='user']", "Al ice", {keepFocus: true});
             this.sendKeys("input[name='user']", casper.page.event.key.Enter , {keepFocus: true});
             this.capture(testName + shotCnt++ + ".png");
         },
