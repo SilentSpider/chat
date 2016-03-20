@@ -4,7 +4,7 @@ var offset = 0x20;
 var end = 0xff;
 
 var x = require('casper').selectXPath;
-var iterator = require('testiterator')();
+var iterator = require('testquick')(); // switch to require 'testiterator' to test chars one by one
 var utils = require("utils");
 
 casper.test.begin('Testing of character set', function(test) {
