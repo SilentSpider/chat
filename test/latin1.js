@@ -4,7 +4,7 @@ var offset = 0xA0;
 var end = 0x17f;
 
 var x = require('casper').selectXPath;
-var iterator = require('testiterator')();
+var iterator = require('testquick')();
 var utils = require("utils");
 
 casper.test.begin('Testing of character set', function(test) {
@@ -15,3 +15,4 @@ casper.test.begin('Testing of character set', function(test) {
         test.done();
     });
 });
+
