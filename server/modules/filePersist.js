@@ -16,18 +16,35 @@ module.exports = function(fs, config) {
 			fs.mkdirSync(basePath + room);
 		}
 	};
+
+    var escapeJson = function(str) {
+
+        var replaced = str
+            .replace(/[\\]/g, '\\\\')
+            .replace(/[\"]/g, '\\"')
+            .replace(/[\/]/g, '\\/')
+            .replace(/[\b]/g, '\\b')
+            .replace(/[\f]/g, '\\f')
+            .replace(/[\n]/g, '\\n')
+            .replace(/[\r]/g, '\\r')
+            .replace(/[\t]/g, '\\t');
+
+        console.log("Converting " + str + " to " + replaced);
+        return replaced;
+    }
+
 	return {
 		addMsg: function(msg, fileName, room, user, timestamp) {
 			ensureRoomExists(room);
 
 			var toPersist = '{';
 			if(msg) {
-				toPersist += '"m":"' + msg + '",';
+				toPersist += '"m":"' + escapeJson(msg) + '",';
 			}
 			if(fileName) {
-				toPersist += '"f":"' + fileName + '",';
+				toPersist += '"f":"' + escapeJson(fileName) + '",';
 			}
-			toPersist += '"u":"' + user + '","t":"' + timestamp + '"},';
+			toPersist += '"u":"' + escapeJson(user) + '","t":"' + timestamp + '"},';
 			fs.appendFileSync(basePath + room + CHAT_FILE, toPersist,'utf8');
 		},
 		getMsgs: function(room) {
