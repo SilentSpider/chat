@@ -10,6 +10,7 @@ module.exports = function(express, system, render, aChat, bChat, compress, fileH
 			express.get('/jquery.js', render.jqueryJs);
 			express.get('/restart', system.restart);
 			express.get('/style.css', render.css);
+			express.get('/hostname', render.hostname);
 			express.get('/:room/qr.svg', render.qrSvg);
 			express.get('/:room/:user/advanced.js', render.advancedJs);
 			express.get('/:room/:user/advanced', render.advanced);

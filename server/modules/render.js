@@ -12,88 +12,88 @@ module.exports = function(renderPipe, crypto, qr, config, fs, useSSL, xml) {
     };
 
 	return {
-		frontPage: function(req, res) {
-			if(!sdCardMounted(res)) return;
+		frontPage: function (req, res) {
+			if (!sdCardMounted(res)) return;
 
-            var random = "";
-            var phonetic = ""
-            for(var i = 0; i < 4; i++) {
-                var idx = Math.floor(Math.random() * config.alphabet.length);
-                random += config.alphabet.charAt(idx);
-                phonetic += config.phonetic[idx] + "\n";
-            }
-			renderPipe.deliver('about.html', {random: random, phonetic:phonetic}, res);
+			var random = "";
+			var phonetic = ""
+			for (var i = 0; i < 4; i++) {
+				var idx = Math.floor(Math.random() * config.alphabet.length);
+				random += config.alphabet.charAt(idx);
+				phonetic += config.phonetic[idx] + "\n";
+			}
+			renderPipe.deliver('about.html', {random: random, phonetic: phonetic}, res);
 		},
 
-		room: function(req, res) {
-            if(!sdCardMounted(res)) return;
+		room: function (req, res) {
+			if (!sdCardMounted(res)) return;
 
 			console.log("requesting " + req.url);
-			if(req.params && req.params.room) {	
-				console.log('entering room ' + req.params.room);	
+			if (req.params && req.params.room) {
+				console.log('entering room ' + req.params.room);
 			}
-			renderPipe.deliver('room.html', 
-					{room:req.params.room, user:req.params.user}, res);
+			renderPipe.deliver('room.html',
+					{room: req.params.room, user: req.params.user}, res);
 		},
-		login: function(req, res) {
-            if(!sdCardMounted(res)) return;
+		login: function (req, res) {
+			if (!sdCardMounted(res)) return;
 
-			if(req.query.user) {
-				 res.redirect('/'+ req.params.room + '/' +
-				 	req.query.user);
-				 res.end();
+			if (req.query.user) {
+				res.redirect('/' + req.params.room + '/' +
+						req.query.user);
+				res.end();
 			}
 			else {
-				renderPipe.deliver('login.html', 
-					{room:req.params.room}, res);
+				renderPipe.deliver('login.html',
+						{room: req.params.room}, res);
 			}
 		},
-		advanced: function(req, res) {
-			renderPipe.deliver('advanced.html', {room:req.params.room, user:req.params.user}, res);
+		advanced: function (req, res) {
+			renderPipe.deliver('advanced.html', {room: req.params.room, user: req.params.user}, res);
 		},
-		advancedJs: function(req, res) {
+		advancedJs: function (req, res) {
 			res.setHeader('content-type', 'text/javascript');
-			renderPipe.deliver('advanced.js', {room:req.params.room, user:req.params.user}, res);
+			renderPipe.deliver('advanced.js', {room: req.params.room, user: req.params.user}, res);
 		},
-		socketioJs: function(req, res) {
+		socketioJs: function (req, res) {
 			res.setHeader('content-type', 'text/javascript');
-			renderPipe.deliver('socket.io-1.2.0.js', {room:req.params.room, user:req.params.user}, res);
+			renderPipe.deliver('socket.io-1.2.0.js', {room: req.params.room, user: req.params.user}, res);
 		},
-		jqueryJs: function(req, res) {
+		jqueryJs: function (req, res) {
 			res.setHeader('content-type', 'text/javascript');
-			renderPipe.deliver('jquery-1.11.3.min.js', {room:req.params.room, user:req.params.user}, res);
+			renderPipe.deliver('jquery-1.11.3.min.js', {room: req.params.room, user: req.params.user}, res);
 		},
-		faviconIco: function(req, res) {
+		faviconIco: function (req, res) {
 			res.setHeader('content-type', 'image/x-icon');
 			renderPipe.raw('favicon.ico', res);
 		},
-        logoSvg: function(req, res) {
-            res.setHeader('content-type', 'image/svg+xml');
-            renderPipe.raw('logo.svg', res);
-        },
-		qrSvg: function(req, res) {
+		logoSvg: function (req, res) {
+			res.setHeader('content-type', 'image/svg+xml');
+			renderPipe.raw('logo.svg', res);
+		},
+		qrSvg: function (req, res) {
 			var content = '' + fs.readFileSync(config.torHostFile);
 			res.setHeader('content-type', 'image/svg+xml');
 			var protocol = "http";
-			if(useSSL) {
+			if (useSSL) {
 				protocol = https;
 			}
-            var room = "";
-            if(req.params.room) {
-                room = "/" + req.params.room;
-            }
-			var qrSvg = qr.imageSync(protocol + '://' + content.trim() + room, { type: 'svg' });
+			var room = "";
+			if (req.params.room) {
+				room = "/" + req.params.room;
+			}
+			var qrSvg = qr.imageSync(protocol + '://' + content.trim() + room, {type: 'svg'});
 
 			var qrXml = new xml.XML(qrSvg);
 
 			var outline = new xml.XML('<path stroke="#8e0d14" fill="none" d="M1.5 1.5h6v6h-6z M23.5 1.5h6v6h-6z M1.5 23.5h6v6h-6z"/>');
-            qrXml.appendChild(outline);
+			qrXml.appendChild(outline);
 
 			var centers = new xml.XML('<path stroke="#8e0d14" fill="#8e0d14" d="M3.5 3.5h2v2h-2z M25.5 3.5h2v2h-2z M3.5 25.5h2v2h-2z"/>');
 			qrXml.appendChild(centers);
 
-            var middle = new xml.XML('<path stroke="#fff" fill="#fff" d="M12.45 12.45h6.1v6.1h-6.1z"/>');
-            qrXml.appendChild(middle);
+			var middle = new xml.XML('<path stroke="#fff" fill="#fff" d="M12.45 12.45h6.1v6.1h-6.1z"/>');
+			qrXml.appendChild(middle);
 
 			var logo = new xml.XML('<g transform="scale(0.05) translate(239 239)">\
 					<path fill="#8e0d14" d="M135.808,70.802c0,35.809-29.029,64.838-64.838,64.838c-35.809,0-64.838-29.029-64.838-64.838\
@@ -111,9 +111,13 @@ module.exports = function(renderPipe, crypto, qr, config, fs, useSSL, xml) {
 
 			res.end(qrXml.toXMLString());
 		},
-        css: function(req, res) {
+		css: function (req, res) {
 			res.setHeader('content-type', 'text/css');
 			renderPipe.deliver('style.css', {}, res);
+		},
+		hostname: function (req, res) {
+			var content = '' + fs.readFileSync(config.torHostFile);
+			res.end(content.trim());
 		}
 	}
 }
